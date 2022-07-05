@@ -31,8 +31,20 @@
         <div class="card-holder"></div>
       </div>
       <div class="col-8">
-        <div class="weather-info"></div>
-        <div class="forecast"></div>
+        <div id="weather-container" class="weather-info">
+          <h2 class="subtitle">
+            <span id="weather-searched-city"></span>
+          </h2>
+          <ul id="list-container">
+            <li id="weather-temp"></li>
+            <li id="weather-wind"></li>
+            <li id="weather-humidity"></li>
+            <li id="weather-uv"></li>
+          </ul>
+        </div>
+        <h2 class="subtitle">
+        <div id="forecast-container"></div>
+        </div>
       </div>
     </main>
     <script src="./assets/js/script.js"></script>
