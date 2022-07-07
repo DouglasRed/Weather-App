@@ -138,9 +138,13 @@ var displayWeather = function (weather, searchedCity) {
       "Temp: " + weather.daily[i].temp.day + `\u00B0` + "F";
     weatherCardEl.appendChild(tempCard);
 
-    var humidityCard = document.createElement("span");
-    humidityCard.textContent = "Humidity: " + weather.daily[i].humidity;
+    var windCard = document.createElement("span");
+    windCard.textContent = "Wind: " + weather.daily[i].wind_speed + " MPH";
 
+    var humidityCard = document.createElement("span");
+    humidityCard.textContent = "Humidity: " + weather.daily[i].humidity + "%";
+
+    weatherCardEl.appendChild(windCard);
     weatherCardEl.appendChild(humidityCard);
     weatherForecast.appendChild(weatherCardEl);
 
