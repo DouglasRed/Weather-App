@@ -10,21 +10,36 @@ var weatherTemp = document.querySelector("#weather-temp");
 var weatherWind = document.querySelector("#weather-wind");
 var weatherHumidity = document.querySelector("#weather-humidity");
 var weatherUV = document.querySelector("#weather-uv");
+var apiKey = "821bf60e7a4a447f19613519e829ee2c";
 
 var searches = [];
 //get value from input element
 
 var getWeather = function (cityName) {
-  var apiKey = "821bf60e7a4a447f19613519e829ee2c";
   var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}`;
 
   fetch(apiUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
         displayWeather(data, city);
+        getAllData(data);
       });
     } else {
       weatherSearchedCity.textContent = "Error: City not found";
+    }
+  });
+};
+
+var getAllData = function (data) {
+  var lat = data.coord.lat;
+  var lon = data.coord.lon;
+  var apiUrl2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}`;
+  // console.log(lat, lon);
+  fetch(apiUrl2).then(function (response) {
+    if (response.ok) {
+      response.json().then(function (data2) {
+        console.log(data2);
+      });
     }
   });
 };
