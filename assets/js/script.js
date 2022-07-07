@@ -21,8 +21,7 @@ var getWeather = function (cityName) {
   fetch(apiUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
-        displayWeather(data, city);
-        getAllData(data);
+        getAllData(data, cityName);
       });
     } else {
       weatherSearchedCity.textContent = "Error: City not found";
@@ -30,15 +29,17 @@ var getWeather = function (cityName) {
   });
 };
 
-var getAllData = function (data) {
+var getAllData = function (data, cityName) {
   var lat = data.coord.lat;
   var lon = data.coord.lon;
-  var apiUrl2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${apiKey}`;
+  var apiUrl2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&units=imperial&appid=${apiKey}`;
   // console.log(lat, lon);
   fetch(apiUrl2).then(function (response) {
     if (response.ok) {
       response.json().then(function (data2) {
-        console.log(data2);
+        console.log(data2.daily[0]);
+
+        displayWeather(data2, cityName);
       });
     }
   });
@@ -58,17 +59,34 @@ var formSubmitHandler = function (event) {
 
 var displayWeather = function (weather, searchedCity) {
   // weatherContainerEl.textContent = "";
-  weatherContainerEl.classList = "border";
-  weatherSearchedCity.textContent = weather.name + " (" + currentDate + ")";
+  weatherContainerEl.classList.add("border");
+  weatherSearchedCity.textContent = searchedCity + " (" + currentDate + ")";
   var statusIcon = document.createElement("img");
   statusIcon.setAttribute(
-    "src",
-    `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
+    `src`,
+    `https://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`
   );
   weatherSearchedCity.appendChild(statusIcon);
-  weatherTemp.textContent = "Temp: " + weather.main.temp + `\u00B0` + "F";
-  weatherWind.textContent = "Wind: " + weather.wind.speed + " MPH";
-  weatherHumidity.textContent = "Humidity: " + weather.main.humidity + "%";
+  weatherTemp.textContent = "Temp: " + weather.current.temp + `\u00B0` + "F";
+  weatherWind.textContent = "Wind: " + weather.current.wind_speed + " MPH";
+  weatherHumidity.textContent = "Humidity: " + weather.current.humidity + "%";
+
+  weatherUV.textContent = "UVI Index: " + weather.current.uvi;
+
+  if (weather.current.uvi < 6) {
+    weatherUV.classList.remove("high-UV");
+    weatherUV.classList.remove("moderate-UV");
+    weatherUV.classList.add("low-UV");
+  } else if (weather.current.uvi >= 6 && weather.current.uvi < 8) {
+    weatherUV.classList.remove("high-UV");
+    weatherUV.classList.add("moderate-UV");
+    weatherUV.classList.remove("low-UV");
+  } else if (weather.current.uvi > 8) {
+    weatherUV.classList.add("high-UV");
+    weatherUV.classList.remove("moderate-UV");
+    weatherUV.classList.remove("low-UV");
+  }
+
   weatherForecast.textContent = "5-Day Forecast:";
   // weatherUV.textContent = "" + weather.name;
   if (weather.length === 0) {
@@ -86,7 +104,7 @@ var displayWeather = function (weather, searchedCity) {
       date.getFullYear();
 
     var weatherCardEl = document.createElement("div");
-    weatherCardEl.classList = "list-item col-2";
+    weatherCardEl.classList.add("list-item col-2");
 
     var titleEl = document.createElement("span");
     titleEl.textContent = futureDay;
@@ -100,7 +118,8 @@ var displayWeather = function (weather, searchedCity) {
     // );
 
     var tempCard = document.createElement("span");
-    tempCard.textContent = "Temp: " + weather.main.temp + `\u00B0` + "F";
+    tempCard.textContent =
+      "Temp: " + weather.daily[0].temp.day + `\u00B0` + "F";
     weatherCardEl.appendChild(tempCard);
     // weatherCardEl.appendChild(statusIcon5);
     weatherForecast.appendChild(weatherCardEl);

@@ -118,3 +118,14 @@ h2 {
 img {
   width: 47px;
 }
+
+.moderate-UV {
+  color: #dbc361;
+}
+
+.high-UV {
+  color: #de1313;
+}
+.low-UV {
+  color: #333;
+}
