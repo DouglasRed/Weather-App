@@ -104,7 +104,7 @@ var displayWeather = function (weather, searchedCity) {
       date.getFullYear();
 
     var weatherCardEl = document.createElement("div");
-    weatherCardEl.classList.add("list-item col-2");
+    weatherCardEl.classList.add("list-item", "col-2");
 
     var titleEl = document.createElement("span");
     titleEl.textContent = futureDay;
@@ -119,7 +119,7 @@ var displayWeather = function (weather, searchedCity) {
 
     var tempCard = document.createElement("span");
     tempCard.textContent =
-      "Temp: " + weather.daily[0].temp.day + `\u00B0` + "F";
+      "Temp: " + weather.daily[i].temp.day + `\u00B0` + "F";
     weatherCardEl.appendChild(tempCard);
     // weatherCardEl.appendChild(statusIcon5);
     weatherForecast.appendChild(weatherCardEl);
