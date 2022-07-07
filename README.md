@@ -14,8 +14,10 @@ A website that displays the current weather of a certain city selected by the us
 
 To visit my website visit https://douglasred.github.io/Weather-App/
 
-To download my code, you can access my github page at https://github.com/DouglasRed/coding-quiz-challenge/tree/main
+To download my code, you can access my github page at https://github.com/DouglasRed/Weather-App
+
+(./assets/images/weather-app.jpg)
 
 ## Contribution
 
-Made with ❤️ by Douglas Red
+Created by Douglas Red
