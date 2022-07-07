@@ -5,6 +5,8 @@
 body {
   min-height: 100vh;
   color: #333;
+  min-width: 500px;
+  background-color: aquamarine;
 }
 
 header {
@@ -27,17 +29,17 @@ h2 {
 }
 
 .col-4 {
-  flex: 0 0 calc(100% * 3 / 12 - 2%);
   min-height: 90vh;
-  background-color: aquamarine;
+  /* background-color: aquamarine; */
   margin-left: 20px;
+  width: 25%;
 }
 
 .col-8 {
-  flex: 0 0 calc(100% * 9 / 12 - 2%);
   min-height: 90vh;
-  background-color: rgb(203, 168, 236);
+  /* background-color: rgb(203, 168, 236); */
   margin-right: 20px;
+  width: 65%;
 }
 
 .city-search {
@@ -79,6 +81,12 @@ h2 {
   background-color: #f1c40f;
 }
 
+#forecast-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
 #list-container {
   list-style: none;
   line-height: 3;
@@ -107,16 +115,15 @@ h2 {
 }
 
 .col-2 {
-  width: 20%;
-}
-
-#forecast {
+  gap: 10px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  font-size: 24px;
+  margin-top: 20px;
 }
 
-img {
-  width: 47px;
+.main-icon {
+  width: 8%;
 }
 
 .moderate-UV {
@@ -128,4 +135,8 @@ img {
 }
 .low-UV {
   color: #333;
+}
+
+.width-100 {
+  width: 100%;
 }

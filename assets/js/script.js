@@ -66,12 +66,13 @@ var displayWeather = function (weather, searchedCity) {
     `src`,
     `https://openweathermap.org/img/wn/${weather.current.weather[0].icon}@2x.png`
   );
+  statusIcon.classList.add("main-icon");
   weatherSearchedCity.appendChild(statusIcon);
   weatherTemp.textContent = "Temp: " + weather.current.temp + `\u00B0` + "F";
   weatherWind.textContent = "Wind: " + weather.current.wind_speed + " MPH";
   weatherHumidity.textContent = "Humidity: " + weather.current.humidity + "%";
 
-  weatherUV.textContent = "UVI Index: " + weather.current.uvi;
+  weatherUV.textContent = "UV Index: " + weather.current.uvi;
 
   if (weather.current.uvi < 6) {
     weatherUV.classList.remove("high-UV");
@@ -87,7 +88,8 @@ var displayWeather = function (weather, searchedCity) {
     weatherUV.classList.remove("low-UV");
   }
 
-  weatherForecast.textContent = "5-Day Forecast:";
+  document.querySelector(".subtitle-forecast").textContent = "5-Day Forecast:";
+  weatherForecast.classList.add("width-100");
   // weatherUV.textContent = "" + weather.name;
   if (weather.length === 0) {
     weatherContainerEl.textContent = "City not found";
@@ -111,17 +113,21 @@ var displayWeather = function (weather, searchedCity) {
 
     weatherCardEl.appendChild(titleEl);
 
-    // var statusIcon5 = document.createElement("img");
-    // statusIcon.setAttribute(
-    //   "src",
-    //   `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
-    // );
-
+    var statusIcon5 = document.createElement("img");
+    statusIcon5.setAttribute(
+      `src`,
+      `https://openweathermap.org/img/wn/${weather.daily[i].weather[0].icon}@2x.png`
+    );
+    weatherCardEl.appendChild(statusIcon5);
     var tempCard = document.createElement("span");
     tempCard.textContent =
       "Temp: " + weather.daily[i].temp.day + `\u00B0` + "F";
     weatherCardEl.appendChild(tempCard);
-    // weatherCardEl.appendChild(statusIcon5);
+
+    var humidityCard = document.createElement("span");
+    humidityCard.textContent = "Humidity: " + weather.daily[i].humidity;
+
+    weatherCardEl.appendChild(humidityCard);
     weatherForecast.appendChild(weatherCardEl);
 
     console.log(futureDay);
