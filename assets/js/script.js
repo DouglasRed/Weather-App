@@ -45,6 +45,12 @@ var displayWeather = function (weather, searchedCity) {
   // weatherContainerEl.textContent = "";
   weatherContainerEl.classList = "border";
   weatherSearchedCity.textContent = weather.name + " (" + currentDate + ")";
+  var statusIcon = document.createElement("img");
+  statusIcon.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
+  );
+  weatherSearchedCity.appendChild(statusIcon);
   weatherTemp.textContent = "Temp: " + weather.main.temp + `\u00B0` + "F";
   weatherWind.textContent = "Wind: " + weather.wind.speed + " MPH";
   weatherHumidity.textContent = "Humidity: " + weather.main.humidity + "%";
@@ -72,38 +78,16 @@ var displayWeather = function (weather, searchedCity) {
 
     weatherCardEl.appendChild(titleEl);
 
-    var statusEl = document.createElement("span");
-    statusEl.classList = "list-item";
+    // var statusIcon5 = document.createElement("img");
+    // statusIcon.setAttribute(
+    //   "src",
+    //   `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`
+    // );
 
-    // if (weather.main === "Clouds") {
-    //   statusEl.innerHTML = "☁️";
-    // } else if (weather[i].main === "Thunderstorm") {
-    //   statusEl.innerHTML = "⛈️";
-    // } else if (weather[i].main === "Drizzle") {
-    //   statusEl.innerHTML = "🌧️";
-    // } else if (weather[i].main === "Rain") {
-    //   statusEl.innerHTML = "🌦️";
-    // } else if (weather[i].main === "Snow") {
-    //   statusEl.innerHTML = "❄️";
-    // } else if (
-    //   weather[i].main === "Mist" ||
-    //   "Smoke" ||
-    //   "Haze" ||
-    //   "Dust" ||
-    //   "Fog" ||
-    //   "Sand" ||
-    //   "Ash" ||
-    //   "squall" ||
-    //   "Tornado"
-    // ) {
-    //   statusEl.innerHTML = "🌫️";
-    // } else if (weather[i].main === "Clear") {
-    //   statusEl.innerHTML = "☀️";
-    // } else {
-    //   statusEl.innerHTML = "Image unavailable";
-    // }
-
-    weatherCardEl.appendChild(statusEl);
+    var tempCard = document.createElement("span");
+    tempCard.textContent = "Temp: " + weather.main.temp + `\u00B0` + "F";
+    weatherCardEl.appendChild(tempCard);
+    // weatherCardEl.appendChild(statusIcon5);
     weatherForecast.appendChild(weatherCardEl);
 
     console.log(futureDay);
